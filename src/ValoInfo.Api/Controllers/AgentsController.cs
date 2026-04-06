@@ -28,7 +28,6 @@ public class AgentsController : ControllerBase
 
     [HttpGet("{id}")]
     [MapToApiVersion("1.0")]
-    [MapToApiVersion("2.0")]
     public async Task<IActionResult> GetAgentById(string id)
     {
         var agent = await _repo.GetAgentById(id);
