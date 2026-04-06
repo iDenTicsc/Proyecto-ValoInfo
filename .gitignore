@@ -1,0 +1,68 @@
+# =========================
+# .NET / Visual Studio
+# =========================
+
+# Archivos binarios y compilados
+bin/
+obj/
+
+# Archivos de Visual Studio
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+.vs/
+
+# Paquetes NuGet
+*.nupkg
+packages/
+
+# Configuraciones locales y sensibles
+*.env
+firebase-key.json
+
+# Archivos de log
+*.log
+
+# =========================
+# Rider / JetBrains
+# =========================
+.idea/
+
+# =========================
+# MacOS
+# =========================
+.DS_Store
+
+# =========================
+# Node / Frontend (si aplica)
+# =========================
+node_modules/
+dist/
+build/
+
+# =========================
+# Test outputs
+# =========================
+TestResults/
+*.coverage
+*.coveragexml
+*.trx
+
+# =========================
+# Archivos generados
+# =========================
+*.dll
+*.exe
+*.pdb
+*.cache
+*.manifest
+*.vsix
+*.tmp
+
+# =========================
+# Otros archivos temporales
+# =========================
+*.log
+*.bak
+*.swp
