@@ -32,7 +32,7 @@ public class AgentsController : ControllerBase
     {
         var agent = await _repo.GetAgentById(id);
 
-        if (agent == null) return NotFound("No encontrado");
+        if (agent == null) return NotFound("No encontrado mi papacho crack");
 
         var response = AgentMapper.ToResponse(agent);
         return Ok(response);
