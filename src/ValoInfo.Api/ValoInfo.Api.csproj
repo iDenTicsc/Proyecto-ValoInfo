@@ -19,10 +19,5 @@
     <ProjectReference Include="..\ValoInfo.Infrastructure\ValoInfo.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-  <None Update="firebase-key.json">
-    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-  </None>
-</ItemGroup>
 
 </Project>
