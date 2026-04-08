@@ -80,11 +80,15 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
+app.Urls.Add($"http://*:{port}");
+
 app.UseCors("AllowAll");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseHttpsRedirection();
     var provider = app.Services.GetRequiredService<IApiVersionDescriptionProvider>();
 
     app.UseSwagger();
