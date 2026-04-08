@@ -9,7 +9,7 @@ WORKDIR /src
 
 COPY . .
 
-RUN dotnet publish ValoInfo.Api/ValoInfo.Api.csproj -c Release -o /app/publish
+RUN dotnet publish src/ValoInfo.Api/ValoInfo.Api.csproj -c Release -o /app/publish
 
 # Final
 FROM base AS final
