@@ -6,6 +6,10 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi;
 using ValoInfo.Application.Interfaces;
 using ValoInfo.Infrastructure.Repositories;
+using DotNetEnv;
+using System.Text;
+
+Env.Load();
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,8 +27,11 @@ builder.Services.AddCors(options =>
 // Registrar Firestore
 builder.Services.AddSingleton(provider =>
 {
-    var credential = GoogleCredential.FromFile("firebase-key.json");
-    
+    var base64 = Environment.GetEnvironmentVariable("FIRESTORE_CREDENTIALS_BASE64") ?? throw new Exception("Falta variable de entorno");
+    var json = Encoding.UTF8.GetString(Convert.FromBase64String(base64));
+
+    var credential = GoogleCredential.FromJson(json);
+
     return new FirestoreDbBuilder
     {
         ProjectId = "valo-info",
