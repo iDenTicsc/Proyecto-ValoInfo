@@ -9,13 +9,12 @@ using ValoInfo.Infrastructure.Repositories;
 using DotNetEnv;
 using System.Text;
 
-Env.Load();
-
 var builder = WebApplication.CreateBuilder(args);
 
-var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
-
-builder.WebHost.UseUrls($"http://*:{port}");
+if (builder.Environment.IsDevelopment())
+{
+    Env.Load();
+}
 
 // Add services to the container.
 //Add CORS
