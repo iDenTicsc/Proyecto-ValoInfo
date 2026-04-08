@@ -1,16 +1,15 @@
-# Imagen base
-FROM mcr.microsoft.com/dotnet/aspnet:10.0 AS base
+# Base runtime
+FROM mcr.microsoft.com/dotnet/aspnet:10.0-preview AS base
 WORKDIR /app
 EXPOSE 8080
 
 # Build
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:10.0-preview AS build
 WORKDIR /src
 
 COPY . .
 
-WORKDIR /src/ValoInfo.Api
-RUN dotnet publish -c Release -o /app/publish
+RUN dotnet publish ValoInfo.Api/ValoInfo.Api.csproj -c Release -o /app/publish
 
 # Final
 FROM base AS final
