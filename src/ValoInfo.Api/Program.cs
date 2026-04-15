@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi;
 using ValoInfo.Application.Interfaces;
 using ValoInfo.Infrastructure.Repositories;
+using ValoInfo.Api.Middleware;
 using DotNetEnv;
 using System.Text;
 
@@ -85,6 +86,7 @@ var app = builder.Build();
 var port = Environment.GetEnvironmentVariable("PORT") ?? "8080";
 app.Urls.Add($"http://*:{port}");
 
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
