@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using ValoInfo.Application.DTOs.Agents;
 using ValoInfo.Application.Interfaces;
 using ValoInfo.Application.Mappings;
+using ValoInfo.Domain.Common;
 
 namespace ValoInfo.Api.Controllers;
 
@@ -22,19 +24,23 @@ public class AgentsController : ControllerBase
     public async Task<IActionResult> GetAll()
     {
         var agents = await _repo.GetAllAgentsAsync();
-        var response = agents.Select(AgentMapper.ToResponse).ToList();
-        return Ok(response);
+        var data = agents.Select(AgentMapper.ToResponse).ToList();
+        return Ok(ApiResponse<List<AgenteResponse>>.Ok(data));
     }
 
     [HttpGet("{id}")]
     [MapToApiVersion("1.0")]
     public async Task<IActionResult> GetAgentById(string id)
     {
+        if (string.IsNullOrWhiteSpace(id))
+            return BadRequest(ApiResponse<AgenteResponse>.BadRequest("El ID no puede estar vacío."));
+
         var agent = await _repo.GetAgentById(id);
 
-        if (agent == null) return NotFound("No encontrado mi papacho crack");
+        if (agent == null)
+            return NotFound(ApiResponse<AgenteResponse>.NotFound("No se encontró un agente con el ID proporcionado."));
 
         var response = AgentMapper.ToResponse(agent);
-        return Ok(response);
+        return Ok(ApiResponse<AgenteResponse>.Ok(response));
     }
 }
